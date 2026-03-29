@@ -33,6 +33,6 @@
             <script>
                 alert("Pendaftaran Berhasil! Data Anda sudah tersimpan.");
             </script>
-        <?php endif; ?>
+        <?php endif; ?> 
 </body>
 </html>
