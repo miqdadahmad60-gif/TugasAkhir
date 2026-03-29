@@ -25,7 +25,7 @@
         </div>
 
         <?php 
-        if(isset($_GET['pesan'])){
+        if(isset($_GET['pesan'])){ 
             if($_GET['pesan'] == "gagal"){
                 echo "<p style='color:red;'>Email atau Password salah!</p>";
             } else if($_GET['pesan'] == "logout"){
