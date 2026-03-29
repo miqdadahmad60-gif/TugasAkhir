@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 
         $sql = "INSERT INTO smartschool (Nama, Email, Password, Role) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare(query: $sql);
-        $stmt->bind_param("ssss", $nama, $email, $password, $role);
+        $stmt->bind_param("ssss", $nama, $email, $password, $role); 
 
         if ($stmt->execute()) {
             header(header: "location: daftarTA.php?status=sukses");
