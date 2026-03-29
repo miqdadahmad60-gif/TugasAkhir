@@ -1,0 +1,136 @@
+ :root {
+            --primary-color: #00bcd4; 
+            --secondary-color: #ff9800; 
+            --accent-color: #212529; 
+            --light-bg: #f8f9fa; 
+            --white: #ffffff;
+            --container-width: 1140px;
+            --bg-feature-card: #e0f7fa; 
+        }
+
+        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; color: var(--accent-color); line-height: 1.6; background-color: var(--light-bg); }
+        .container { width: 90%; max-width: var(--container-width); margin: 0 auto; padding: 20px 0; }
+        header { background-color: var(--white); border-bottom: 1px solid #e9ecef; position: sticky; top: 0; z-index: 5000; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-color); text-decoration: none; cursor: pointer; }
+        .nav-links a { color: var(--accent-color); text-decoration: none; margin-left: 25px; font-weight: 500; transition: color 0.3s; cursor: pointer; }
+        .nav-links a:hover { color: var(--secondary-color); }
+        .nav-actions { display: flex; align-items: center; }
+        .nav-actions .login-link { color: var(--accent-color); text-decoration: none; margin-right: 15px; padding: 8px 15px; font-weight: 500; transition: color 0.3s; cursor: pointer; }
+        .nav-actions .login-link:hover { color: var(--primary-color); }
+        .nav-actions .daftar-button { display: inline-block; padding: 8px 18px; border-radius: 50px; text-decoration: none; font-weight: bold; background-color: var(--secondary-color); color: var(--white); border: 2px solid var(--secondary-color); transition: background-color 0.3s, transform 0.3s; text-transform: uppercase; font-size: 0.9rem; cursor: pointer; }
+        .nav-actions .daftar-button:hover { background-color: #e68900; transform: translateY(-1px); }
+
+        .page-view { display: none; }
+        .page-view.active { display: block; }
+
+        .hero { background: linear-gradient(135deg, var(--white) 0%, var(--bg-feature-card) 100%); padding: 100px 0; text-align: center; border-bottom: 5px solid var(--primary-color); }
+        .hero h1 { font-size: 3rem; color: var(--accent-color); margin-bottom: 10px; }
+        .hero p { font-size: 1.3rem; color: var(--accent-color); margin-bottom: 40px; font-weight: 300; }
+
+        .cta-button { display: inline-block; padding: 15px 30px; margin: 5px; border-radius: 50px; text-decoration: none; font-weight: bold; transition: background-color 0.3s, transform 0.3s; text-transform: uppercase; cursor: pointer; }
+        .cta-primary { background-color: var(--secondary-color); color: var(--white); border: 2px solid var(--secondary-color); }
+        .cta-secondary { background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); }
+        .cta-primary:hover { background-color: #e68900; transform: translateY(-2px); }
+        .cta-secondary:hover { background-color: var(--primary-color); color: var(--white); }
+
+        section { padding: 80px 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--accent-color); position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background-color: var(--secondary-color); margin: 10px auto 0; border-radius: 2px; }
+
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .feature-item { background-color: var(--bg-feature-card); padding: 30px; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); text-align: center; transition: 0.4s; display: block; text-decoration: none; color: var(--accent-color); cursor: pointer; }
+        .feature-item:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); border: 1px solid var(--primary-color); }
+        .icon { font-size: 3rem; color: var(--secondary-color); }
+
+        .stats { background-color: var(--primary-color); color: var(--white); text-align: center; padding: 50px 0; }
+        .stats-grid { display: flex; justify-content: space-around; flex-wrap: wrap; }
+        .stat-item .number { font-size: 4rem; font-weight: bold; color: var(--secondary-color); }
+
+        .programs-list { list-style: none; padding: 0; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; }
+        .programs-list li { font-size: 1.2rem; padding: 15px 30px; margin: 10px; background-color: #f0f0f0; border-radius: 8px; border-left: 5px solid var(--primary-color); transition: 0.3s; }
+        .programs-list li:hover { background-color: var(--bg-feature-card); }
+
+        footer { background-color: var(--accent-color); color: var(--white); padding: 50px 0 20px; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        footer h4 { color: var(--primary-color); border-bottom: 2px solid var(--secondary-color); padding-bottom: 5px; display: inline-block; }
+        footer a { color: #ccc; text-decoration: none; display: block; margin-bottom: 8px; transition: color 0.3s; }
+        .copyright { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #495057; }
+
+        .auth-form-container { max-width: 450px; margin: 60px auto; padding: 40px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 5px solid var(--secondary-color); }
+        .auth-button { width: 100%; padding: 12px; border: none; border-radius: 5px; background-color: var(--secondary-color); color: var(--white); font-weight: bold; cursor: pointer; }
+        
+        .banner-rm-illustration { background-color: var(--secondary-color); height: 250px; position: relative; }
+        .banner-content { position: absolute; top: 0; left: 0; width: 100%; height: 250px; background: linear-gradient(rgba(255, 152, 0, 0.9), rgba(255, 152, 0, 0.9)); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .banner-content h1 { color: white; margin:0; }
+
+        .materi-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .materi-table th, .materi-table td { border-bottom: 1px solid #eee; padding: 10px; text-align: left; font-size: 0.9rem; }
+        .materi-table th { background: var(--primary-color); color: white; border-radius: 5px 5px 0 0; }
+
+        .input-kuis { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .label-soal { font-weight: bold; display: block; margin-top: 10px; }
+
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; }
+        .modal-box { background: white; width: 90%; max-width: 500px; padding: 30px; border-radius: 15px; position: relative; }
+        .btn-opsi { display: block; width: 100%; padding: 15px; margin-top: 10px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 8px; text-align: left; cursor: pointer; transition: 0.3s; font-size: 1rem; }
+        .btn-opsi:hover { background: var(--bg-feature-card); border-color: var(--primary-color); }
+        .btn-tutup-modal { margin-top: 20px; background: none; border: none; color: #888; text-decoration: underline; cursor: pointer; width: 100%; }
+
+        /* ========================= */
+/* STYLE HALAMAN PEMINJAMAN */
+/* ========================= */
+
+.form-peminjaman {
+    max-width: 500px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    border-top: 5px solid var(--secondary-color);
+}
+
+.form-peminjaman h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.form-peminjaman button{
+    width:100%;
+    padding:12px;
+    background: var(--secondary-color);
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.form-peminjaman button:hover{
+    background:#e68900;
+}
+
+.tabel-peminjaman{
+    width:90%;
+    margin:40px auto;
+    border-collapse: collapse;
+    background:white;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.tabel-peminjaman th{
+    background: var(--primary-color);
+    color:white;
+    padding:12px;
+}
+
+.tabel-peminjaman td{
+    padding:10px;
+    border-bottom:1px solid #eee;
+}
+
+.tabel-peminjaman tr:hover{
+    background:#f4f4f4;
+}
