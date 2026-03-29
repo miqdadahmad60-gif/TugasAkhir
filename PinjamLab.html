@@ -1,23 +1,114 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['nama'])) {
-    header("Location: login.php");
-}
-?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --primary-color: #00bcd4; 
+            --secondary-color: #ff9800; 
+            --accent-color: #212529; 
+            --light-bg: #f8f9fa; 
+            --white: #ffffff;
+            --container-width: 1140px;
+            --bg-feature-card: #e0f7fa; 
+        }
+          section { padding: 80px 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--accent-color); position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background-color: var(--secondary-color); margin: 10px auto 0; border-radius: 2px; }
+
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .feature-item { background-color: var(--bg-feature-card); padding: 30px; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); text-align: center; transition: 0.4s; display: block; text-decoration: none; color: var(--accent-color); cursor: pointer; }
+        .feature-item:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); border: 1px solid var(--primary-color); }
+        .icon { font-size: 3rem; color: var(--secondary-color); }
+
+        .stats { background-color: var(--primary-color); color: var(--white); text-align: center; padding: 50px 0; }
+        .stats-grid { display: flex; justify-content: space-around; flex-wrap: wrap; }
+        .stat-item .number { font-size: 4rem; font-weight: bold; color: var(--secondary-color); }
+
+        .programs-list { list-style: none; padding: 0; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; }
+        .programs-list li { font-size: 1.2rem; padding: 15px 30px; margin: 10px; background-color: #f0f0f0; border-radius: 8px; border-left: 5px solid var(--primary-color); transition: 0.3s; }
+        .programs-list li:hover { background-color: var(--bg-feature-card); }
+
+        footer { background-color: var(--accent-color); color: var(--white); padding: 50px 0 20px; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        footer h4 { color: var(--primary-color); border-bottom: 2px solid var(--secondary-color); padding-bottom: 5px; display: inline-block; }
+        footer a { color: #ccc; text-decoration: none; display: block; margin-bottom: 8px; transition: color 0.3s; }
+        .copyright { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #495057; }
+
+        .auth-form-container { max-width: 450px; margin: 60px auto; padding: 40px; background-color: var(--white); border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 5px solid var(--secondary-color); }
+        .auth-button { width: 100%; padding: 12px; border: none; border-radius: 5px; background-color: var(--secondary-color); color: var(--white); font-weight: bold; cursor: pointer; }
+        
+        .banner-rm-illustration { background-color: var(--secondary-color); height: 250px; position: relative; }
+        .banner-content { position: absolute; top: 0; left: 0; width: 100%; height: 250px; background: linear-gradient(rgba(255, 152, 0, 0.9), rgba(255, 152, 0, 0.9)); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .banner-content h1 { color: white; margin:0; }
+
+        .materi-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .materi-table th, .materi-table td { border-bottom: 1px solid #eee; padding: 10px; text-align: left; font-size: 0.9rem; }
+        .materi-table th { background: var(--primary-color); color: white; border-radius: 5px 5px 0 0; }
+
+        .input-kuis { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .label-soal { font-weight: bold; display: block; margin-top: 10px; }
+
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; }
+        .modal-box { background: white; width: 90%; max-width: 500px; padding: 30px; border-radius: 15px; position: relative; }
+        .btn-opsi { display: block; width: 100%; padding: 15px; margin-top: 10px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 8px; text-align: left; cursor: pointer; transition: 0.3s; font-size: 1rem; }
+        .btn-opsi:hover { background: var(--bg-feature-card); border-color: var(--primary-color); }
+        .btn-tutup-modal { margin-top: 20px; background: none; border: none; color: #888; text-decoration: underline; cursor: pointer; width: 100%; }
+    </style>
 </head>
 <body>
+     <div id="halaman-peminjaman" class="page-view">
+            <div class="auth-form-container" style="max-width: 600px;">
+                <h2 style="text-align:center">Form Peminjaman Fasilitas</h2>
+                <label class="label-soal">Nama Lengkap Siswa:</label>
+                <input type="text" id="p-nama-siswa" class="input-kuis" placeholder="Masukkan nama Anda">
+                <label class="label-soal">Fasilitas yang Dipinjam:</label>
+                <select id="p-jenis-fasilitas" class="input-kuis">
+                    <option value="Laboratorium RPL">Laboratorium RPL</option>
+                    <option value="Laboratorium Akuntansi">Laboratorium Akuntansi</option>
+                    <option value="Aula Utama">Aula Utama</option>
+                    <option value="Proyektor LCD">Proyektor LCD</option>
+                    <option value="Laptop Sekolah">Laptop Sekolah</option>
+                </select>
+                <label class="label-soal">Tanggal Penggunaan:</label>
+                <input type="date" id="p-tanggal" class="input-kuis">
+                <button class="auth-button" style="margin-top:20px;" onclick="ajukanPinjaman()">KIRIM PERMOHONAN</button>
+                <button onclick="showPage('beranda')" style="width:100%; background:none; border:none; color:gray; cursor:pointer; margin-top:10px;">Batal</button>
+            </div>
+        </div>
 
-<h2>Dashboard</h2>
+        <script>
+          // --- PEMINJAMAN ---
+        function ajukanPinjaman() {
+            const nama = document.getElementById('p-nama-siswa').value;
+            const fas = document.getElementById('p-jenis-fasilitas').value;
+            const tgl = document.getElementById('p-tanggal').value;
+            if(!nama || !tgl) return alert("Lengkapi data!");
+            let db = JSON.parse(localStorage.getItem('ss_peminjaman')) || [];
+            db.push({ id: Date.now(), nama, fasilitas: fas, tanggal: tgl });
+            localStorage.setItem('ss_peminjaman', JSON.stringify(db));
+            alert("Berhasil dikirim!");
+            showPage('beranda');
+        }
 
-<p>Selamat datang, <?php echo $_SESSION['nama']; ?></p>
+        function renderAdminPeminjaman() {
+            const t = document.getElementById('tabel-admin-pinjam');
+            let db = JSON.parse(localStorage.getItem('ss_peminjaman')) || [];
+            t.innerHTML = db.length ? "" : "<tr><td colspan='4' style='text-align:center; padding:15px;'>Kosong</td></tr>";
+            db.forEach(item => {
+                t.innerHTML += `<tr><td>${item.nama}</td><td>${item.fasilitas}</td><td>${item.tanggal}</td>
+                <td><button onclick="hapusPinjaman(${item.id})" style="background:#e74c3c; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">SELESAI</button></td></tr>`;
+            });
+        }
 
-<a href="logout.php">Logout</a>
-
+        function hapusPinjaman(id) {
+            let db = JSON.parse(localStorage.getItem('ss_peminjaman')) || [];
+            localStorage.setItem('ss_peminjaman', JSON.stringify(db.filter(p => p.id !== id)));
+            renderAdminPeminjaman();
+        }
+        
+    </script>
 </body>
 </html>
